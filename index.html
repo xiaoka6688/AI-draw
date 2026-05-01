@@ -404,6 +404,41 @@
       gap: 8px;
     }
 
+    .key-input-wrapper {
+      flex: 1;
+      position: relative;
+    }
+
+    .key-input-wrapper input {
+      width: 100%;
+      height: 40px;
+      padding-right: 48px;
+    }
+
+    .btn-eye {
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .btn-eye:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+    }
+
     .key-input-row input {
       flex: 1;
       height: 40px;
@@ -961,7 +996,10 @@
       <div class="key-section">
         <div class="key-label">第3步：输入Key (需为小卡AI支持的API Key)</div>
         <div class="key-input-row">
-          <input type="text" id="userKey" placeholder="sk-..." style="height:40px;">
+          <div class="key-input-wrapper">
+            <input type="password" id="userKey" placeholder="sk-..." style="height:40px;">
+            <button class="btn-eye" id="toggleKeyVisibility" title="显示/隐藏密钥">👁</button>
+          </div>
           <button class="btn-sm" id="saveKey">保存</button>
           <button class="btn-sm" id="queryCredits">查询剩余</button>
         </div>
@@ -1040,6 +1078,7 @@
     const selectAllBtn = document.getElementById('selectAllBtn');
     const downloadSelectedBtn = document.getElementById('downloadSelectedBtn');
     const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+    const toggleKeyVisibilityBtn = document.getElementById('toggleKeyVisibility');
 
     let images = [];
     let currentPage = 1;
@@ -1105,6 +1144,12 @@
         reader.readAsDataURL(file);
       });
     }
+
+    toggleKeyVisibilityBtn.addEventListener('click', () => {
+      const type = userKeyInput.type === 'password' ? 'text' : 'password';
+      userKeyInput.type = type;
+      toggleKeyVisibilityBtn.textContent = type === 'password' ? '👁' : '🙈';
+    });
 
     document.getElementById('saveKey').addEventListener('click', () => {
       const key = userKeyInput.value.trim();
