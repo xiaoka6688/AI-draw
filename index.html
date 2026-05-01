@@ -407,35 +407,47 @@
     .key-input-wrapper {
       flex: 1;
       position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      background-color: rgba(0, 0, 0, 0.4);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .key-input-wrapper:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12), 0 0 20px rgba(239, 68, 68, 0.08);
+      background-color: rgba(0, 0, 0, 0.5);
     }
 
     .key-input-wrapper input {
-      width: 100%;
+      width: calc(100% - 40px);
       height: 40px;
-      padding-right: 48px;
+      border: none;
+      background: transparent;
+      padding-right: 0;
     }
 
     .btn-eye {
       position: absolute;
-      right: 4px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      border: 1px solid var(--glass-border);
-      background: rgba(255, 255, 255, 0.05);
+      right: 0;
+      top: 0;
+      width: 40px;
+      height: 100%;
+      border: none;
+      background: rgba(255, 255, 255, 0.03);
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 14px;
+      font-size: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
+      border-left: 1px solid var(--glass-border);
     }
 
     .btn-eye:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
       color: var(--text-main);
     }
 
